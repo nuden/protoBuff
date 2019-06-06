@@ -16,31 +16,11 @@ function on_server_client_comming(session) {
 
 	session.on("message", function(data) {
 		console.log("收到数据：", data);
-
-		session.send(data);
+        let str = "客户端你好，我是服务器！";
+        console.log("发送数据：", str);
+		session.send(str);
 	});
 }
 server.on("connection", on_server_client_comming);
 
 
-var socket_io = require('socket.io')
-var sio = socket_io(6081);
-
-sio.sockets.on('connection',function(socket){
-	console.log("connect called");
-
-	// 自定义事件
-	socket.on("your_echo", function (data) {
-		console.log("your_echo", data);
-        let str = "客户端你好，我是服务器！";
-		socket.emit("your_echo", str);
-	});
-	// end 
-
-	// 系统事件
-	socket.on('disconnect',function(data){
-		console.log("disconnect");		
-	});
-
-
-});

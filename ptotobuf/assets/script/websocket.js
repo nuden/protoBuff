@@ -4,7 +4,8 @@ var websocket = {
     // 网络连接成功了以后调用
     on_open: function(event) {
         // test
-        this.send_data("HelloWorld");
+        //this.send_data("HelloWorld");
+        console.log("服务器连接成功！");
         // end
     },
 
@@ -42,8 +43,9 @@ var websocket = {
     },
 
     // 发送数据, sock.send;
-    send_data: function(data) {
+    send_data: function(data,cb) {
         this.sock.send(data);
+        this.sock.onmessage  = cb;   
     },
 };
 
